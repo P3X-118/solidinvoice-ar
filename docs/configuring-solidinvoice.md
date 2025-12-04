@@ -20,11 +20,11 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
 # Setting up SolidInvoice
 
-This is an [Ansible](https://www.ansible.com/) role which installs [SolidInvoice](https://solidinvoice.org/) to run as a [Docker](https://www.docker.com/) container wrapped in a systemd service.
+This is an [Ansible](https://www.ansible.com/) role which installs [SolidInvoice](https://github.com/SolidInvoice/SolidInvoice) to run as a [Docker](https://www.docker.com/) container wrapped in a systemd service.
 
-SolidInvoice is a web-based free software for farm management, planning, and record keeping. It is developed by a community of farmers, developers, researchers, and organizations.
+SolidInvoice is a web-based free software for invoicing.
 
-See the project's [documentation](https://solidinvoice.org/guide/) to learn what SolidInvoice does and why it might be useful to you.
+See the project's [documentation](https://docs.solidinvoice.co/en/latest/) to learn what SolidInvoice does and why it might be useful to you.
 
 ## Prerequisites
 
@@ -65,9 +65,6 @@ solidinvoice_hostname: "example.com"
 After adjusting the hostname, make sure to adjust your DNS records to point the domain to your server.
 
 **Note**: hosting SolidInvoice under a subpath (by configuring the `solidinvoice_path_prefix` variable) does not seem to be possible due to SolidInvoice's technical limitations.
-
->[!WARNING]
-> Once the hostname is set, it cannot be changed easily as it involves adjusting configuration files.
 
 ### Specify database
 
