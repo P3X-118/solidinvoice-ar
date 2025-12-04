@@ -4,26 +4,26 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 ---
-# The command to add the hostname to `trusted_host_patterns` on.settings.php: ansible-playbook -i inventory/hosts setup.yml --tags=trusted-host-farmos
+# The command to add the hostname to `trusted_host_patterns` on.settings.php: ansible-playbook -i inventory/hosts setup.yml --tags=trusted-host-solidinvoice
 
-- name: Ensure farmOS settings.php file writable
+- name: Ensure SolidInvoice settings.php file writable
   ansible.builtin.file:
-    path: "{{ farmos_sites_path }}/default/settings.php"
+    path: "{{ solidinvoice_sites_path }}/default/settings.php"
     mode: "0750"
-    owner: "{{ farmos_uid }}"
-    group: "{{ farmos_gid }}"
+    owner: "{{ solidinvoice_uid }}"
+    group: "{{ solidinvoice_gid }}"
 
-- name: Ensure farmOS hostname is added to `trusted_host_patterns` on settings.php
+- name: Ensure SolidInvoice hostname is added to `trusted_host_patterns` on settings.php
   ansible.builtin.blockinfile:
-    path: "{{ farmos_sites_path }}/default/settings.php"
+    path: "{{ solidinvoice_sites_path }}/default/settings.php"
     block: |
       $settings['trusted_host_patterns'] = [
-       '^{{ farmos_hostname | regex_escape() }}$',
+       '^{{ solidinvoice_hostname | regex_escape() }}$',
       ];
 
-- name: Ensure farmOS settings.php non-writable
+- name: Ensure SolidInvoice settings.php non-writable
   ansible.builtin.file:
-    path: "{{ farmos_sites_path }}/default/settings.php"
+    path: "{{ solidinvoice_sites_path }}/default/settings.php"
     mode: "0444"
-    owner: "{{ farmos_uid }}"
-    group: "{{ farmos_gid }}"
+    owner: "{{ solidinvoice_uid }}"
+    group: "{{ solidinvoice_gid }}"

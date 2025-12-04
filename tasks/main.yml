@@ -4,40 +4,40 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 ---
-- name: Perform farmOS installation tasks
-  when: farmos_enabled | bool
+- name: Perform SolidInvoice installation tasks
+  when: solidinvoice_enabled | bool
   tags:
     - setup-all
-    - setup-farmos
+    - setup-solidinvoice
     - install-all
-    - install-farmos
+    - install-solidinvoice
   block:
-    - name: Validate farmOS configuration
+    - name: Validate SolidInvoice configuration
       ansible.builtin.include_tasks: "{{ role_path }}/tasks/validate_config.yml"
-    - name: Install farmOS
+    - name: Install SolidInvoice
       ansible.builtin.include_tasks: "{{ role_path }}/tasks/install.yml"
 
-- name: Perform tasks to print database credentials for farmOS
-  when: farmos_enabled | bool
+- name: Perform tasks to print database credentials for SolidInvoice
+  when: solidinvoice_enabled | bool
   tags:
-    - print-db-credentials-farmos
+    - print-db-credentials-solidinvoice
   block:
-    - name: Print database credentials for farmOS
+    - name: Print database credentials for SolidInvoice
       ansible.builtin.include_tasks: "{{ role_path }}/tasks/print_db_credentials.yml"
 
 - name: Perform tasks to add `trusted_host_patterns`
-  when: farmos_enabled | bool
+  when: solidinvoice_enabled | bool
   tags:
-    - trusted-host-farmos
+    - trusted-host-solidinvoice
   block:
-    - name: Run a command for adding farmOS hostname to `trusted_host_patterns` on settings.php
+    - name: Run a command for adding SolidInvoice hostname to `trusted_host_patterns` on settings.php
       ansible.builtin.include_tasks: "{{ role_path }}/tasks/trusted_host_patterns.yml"
 
-- name: Perform farmOS uninstallation tasks
-  when: not farmos_enabled | bool
+- name: Perform SolidInvoice uninstallation tasks
+  when: not solidinvoice_enabled | bool
   tags:
     - setup-all
-    - setup-farmos
+    - setup-solidinvoice
   block:
-    - name: Uninstall farmOS
+    - name: Uninstall SolidInvoice
       ansible.builtin.include_tasks: "{{ role_path }}/tasks/uninstall.yml"

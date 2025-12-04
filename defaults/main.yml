@@ -8,122 +8,122 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 ---
-# Project source code URL: https://github.com/farmOS/farmOS
+# Project source code URL: https://github.com/SolidInvoice/SolidInvoice
 
-farmos_enabled: true
+solidinvoice_enabled: true
 
-farmos_identifier: farmos
-farmos_base_path: "/{{ farmos_identifier }}"
+solidinvoice_identifier: solidinvoice
+solidinvoice_base_path: "/{{ solidinvoice_identifier }}"
 
-# `farmos_data_path` is used for storing data in mounted directories
-farmos_data_path: "{{ farmos_base_path }}/data"
-farmos_keys_path: "{{ farmos_data_path }}/keys"
-farmos_sites_path: "{{ farmos_data_path }}/sites"
+# `solidinvoice_data_path` is used for storing data in mounted directories
+solidinvoice_data_path: "{{ solidinvoice_base_path }}/data"
+solidinvoice_keys_path: "{{ solidinvoice_data_path }}/keys"
+solidinvoice_sites_path: "{{ solidinvoice_data_path }}/sites"
 
-# renovate: datasource=docker depName=farmos/farmos versioning=semver
-farmos_version: 3.4.5
+# renovate: datasource=docker depName=solidinvoice/solidinvoice versioning=semver
+solidinvoice_version: 3.4.5
 
-farmos_uid: ""
-farmos_gid: ""
+solidinvoice_uid: ""
+solidinvoice_gid: ""
 
-farmos_scheme: https
+solidinvoice_scheme: https
 
-# The hostname at which farmOS is served.
-farmos_hostname: ""
+# The hostname at which SolidInvoice is served.
+solidinvoice_hostname: ""
 
-# The path at which farmOS is exposed.
-# This value must either be `/` or not end with a slash (e.g. `/farmos`).
+# The path at which SolidInvoice is exposed.
+# This value must either be `/` or not end with a slash (e.g. `/solidinvoice`).
 #
-# Hosting farmOS under a subpath does not seem to be possible due to farmOS's
+# Hosting SolidInvoice under a subpath does not seem to be possible due to SolidInvoice's
 # technical limitations.
-farmos_path_prefix: /
+solidinvoice_path_prefix: /
 
-farmos_container_image: "{{ farmos_container_image_registry_prefix }}farmos/farmos:{{ farmos_container_image_tag }}"
-farmos_container_image_tag: "{{ farmos_version }}"
-farmos_container_image_registry_prefix: "{{ farmos_container_image_registry_prefix_upstream }}"
-farmos_container_image_registry_prefix_upstream: "{{ farmos_container_image_registry_prefix_upstream_default }}"
-farmos_container_image_registry_prefix_upstream_default: docker.io/
-farmos_container_image_force_pull: "{{ farmos_container_image.endswith(':latest') }}"
+solidinvoice_container_image: "{{ solidinvoice_container_image_registry_prefix }}solidinvoice/solidinvoice:{{ solidinvoice_container_image_tag }}"
+solidinvoice_container_image_tag: "{{ solidinvoice_version }}"
+solidinvoice_container_image_registry_prefix: "{{ solidinvoice_container_image_registry_prefix_upstream }}"
+solidinvoice_container_image_registry_prefix_upstream: "{{ solidinvoice_container_image_registry_prefix_upstream_default }}"
+solidinvoice_container_image_registry_prefix_upstream_default: docker.io/
+solidinvoice_container_image_force_pull: "{{ solidinvoice_container_image.endswith(':latest') }}"
 
-farmos_container_image_self_build: false
-farmos_container_image_self_build_name: "farmos/farmos:{{ farmos_container_image_self_build_repo_version }}"
-farmos_container_image_self_build_repo: "https://github.com/farmOS/farmOS.git"
-farmos_container_image_self_build_repo_version: "{{ farmos_version if farmos_version != 'latest' else 'main' }}"
-farmos_container_image_self_build_src_files_path: "{{ farmos_base_path }}/docker-src"
+solidinvoice_container_image_self_build: false
+solidinvoice_container_image_self_build_name: "solidinvoice/solidinvoice:{{ solidinvoice_container_image_self_build_repo_version }}"
+solidinvoice_container_image_self_build_repo: "https://github.com/SolidInvoice/SolidInvoice.git"
+solidinvoice_container_image_self_build_repo_version: "{{ solidinvoice_version if solidinvoice_version != 'latest' else 'main' }}"
+solidinvoice_container_image_self_build_src_files_path: "{{ solidinvoice_base_path }}/docker-src"
 
 # Controls whether the container exposes its HTTP port (tcp/80 in the container).
 #
 # Takes an "<ip>:<port>" or "<port>" value (e.g. "127.0.0.1:2586"), or empty string to not expose.
-farmos_container_http_host_bind_port: ""
+solidinvoice_container_http_host_bind_port: ""
 
 # The base container network. It will be auto-created by this role if it doesn't exist already.
-farmos_container_network: "{{ farmos_identifier }}"
+solidinvoice_container_network: "{{ solidinvoice_identifier }}"
 
 # The port number in the container
-farmos_container_http_port: 80
+solidinvoice_container_http_port: 80
 
 # A list of additional container networks that the container would be connected to.
 # The role does not create these networks, so make sure they already exist.
 # Use this to expose this container to another reverse proxy, which runs in a different container network.
-farmos_container_additional_networks: "{{ farmos_container_additional_networks_auto + farmos_container_additional_networks_custom }}"
-farmos_container_additional_networks_auto: []
-farmos_container_additional_networks_custom: []
+solidinvoice_container_additional_networks: "{{ solidinvoice_container_additional_networks_auto + solidinvoice_container_additional_networks_custom }}"
+solidinvoice_container_additional_networks_auto: []
+solidinvoice_container_additional_networks_custom: []
 
 # A list of additional "volumes" to mount in the container.
 # This list gets populated dynamically at runtime. You can provide a different default value,
 # if you wish to mount your own files into the container.
 # Contains definition objects like this: `{"type": "bind", "src": "/outside", "dst": "/inside", "options": "readonly"}.
 # See the `--mount` documentation for the `docker run` command.
-farmos_container_additional_volumes: "{{ farmos_container_additional_volumes_auto + farmos_container_additional_volumes_custom }}"
-farmos_container_additional_volumes_auto: []
-farmos_container_additional_volumes_custom: []
+solidinvoice_container_additional_volumes: "{{ solidinvoice_container_additional_volumes_auto + solidinvoice_container_additional_volumes_custom }}"
+solidinvoice_container_additional_volumes_auto: []
+solidinvoice_container_additional_volumes_custom: []
 
-# farmos_container_labels_traefik_enabled controls whether labels to assist a Traefik reverse-proxy will be attached to the container.
+# solidinvoice_container_labels_traefik_enabled controls whether labels to assist a Traefik reverse-proxy will be attached to the container.
 # See `../templates/labels.j2` for details.
 #
-# To inject your own other container labels, see `farmos_container_labels_additional_labels`.
-farmos_container_labels_traefik_enabled: true
-farmos_container_labels_traefik_docker_network: "{{ farmos_container_network }}"
-farmos_container_labels_traefik_hostname: "{{ farmos_hostname }}"
-# The path prefix must either be `/` or not end with a slash (e.g. `/farmos`).
-farmos_container_labels_traefik_path_prefix: "{{ farmos_path_prefix }}"
-farmos_container_labels_traefik_rule: "Host(`{{ farmos_container_labels_traefik_hostname }}`){% if farmos_container_labels_traefik_path_prefix != '/' %} && PathPrefix(`{{ farmos_container_labels_traefik_path_prefix }}`){% endif %}"
-farmos_container_labels_traefik_priority: 0
-farmos_container_labels_traefik_entrypoints: web-secure
-farmos_container_labels_traefik_tls: "{{ farmos_container_labels_traefik_entrypoints != 'web' }}"
-farmos_container_labels_traefik_tls_certResolver: default  # noqa var-naming
+# To inject your own other container labels, see `solidinvoice_container_labels_additional_labels`.
+solidinvoice_container_labels_traefik_enabled: true
+solidinvoice_container_labels_traefik_docker_network: "{{ solidinvoice_container_network }}"
+solidinvoice_container_labels_traefik_hostname: "{{ solidinvoice_hostname }}"
+# The path prefix must either be `/` or not end with a slash (e.g. `/solidinvoice`).
+solidinvoice_container_labels_traefik_path_prefix: "{{ solidinvoice_path_prefix }}"
+solidinvoice_container_labels_traefik_rule: "Host(`{{ solidinvoice_container_labels_traefik_hostname }}`){% if solidinvoice_container_labels_traefik_path_prefix != '/' %} && PathPrefix(`{{ solidinvoice_container_labels_traefik_path_prefix }}`){% endif %}"
+solidinvoice_container_labels_traefik_priority: 0
+solidinvoice_container_labels_traefik_entrypoints: web-secure
+solidinvoice_container_labels_traefik_tls: "{{ solidinvoice_container_labels_traefik_entrypoints != 'web' }}"
+solidinvoice_container_labels_traefik_tls_certResolver: default  # noqa var-naming
 
 # Controls which additional headers to attach to all HTTP requests.
-# To add your own custom request headers, use `farmos_container_labels_traefik_additional_request_headers_custom`
-farmos_container_labels_traefik_additional_request_headers: "{{ farmos_container_labels_traefik_additional_request_headers_auto | combine(farmos_container_labels_traefik_additional_request_headers_custom) }}"
-farmos_container_labels_traefik_additional_request_headers_auto: {}
-farmos_container_labels_traefik_additional_request_headers_custom: {}
+# To add your own custom request headers, use `solidinvoice_container_labels_traefik_additional_request_headers_custom`
+solidinvoice_container_labels_traefik_additional_request_headers: "{{ solidinvoice_container_labels_traefik_additional_request_headers_auto | combine(solidinvoice_container_labels_traefik_additional_request_headers_custom) }}"
+solidinvoice_container_labels_traefik_additional_request_headers_auto: {}
+solidinvoice_container_labels_traefik_additional_request_headers_custom: {}
 
 # Controls which additional headers to attach to all HTTP responses.
-# To add your own custom response headers, use `farmos_container_labels_traefik_additional_response_headers_custom`
-farmos_container_labels_traefik_additional_response_headers: "{{ farmos_container_labels_traefik_additional_response_headers_auto | combine(farmos_container_labels_traefik_additional_response_headers_custom) }}"
-farmos_container_labels_traefik_additional_response_headers_auto: |
+# To add your own custom response headers, use `solidinvoice_container_labels_traefik_additional_response_headers_custom`
+solidinvoice_container_labels_traefik_additional_response_headers: "{{ solidinvoice_container_labels_traefik_additional_response_headers_auto | combine(solidinvoice_container_labels_traefik_additional_response_headers_custom) }}"
+solidinvoice_container_labels_traefik_additional_response_headers_auto: |
   {{
     {}
-    | combine ({'X-XSS-Protection': farmos_http_header_xss_protection} if farmos_http_header_xss_protection else {})
-    | combine ({'X-Content-Type-Options': farmos_http_header_content_type_options} if farmos_http_header_content_type_options else {})
-    | combine ({'Content-Security-Policy': farmos_http_header_content_security_policy} if farmos_http_header_content_security_policy else {})
-    | combine ({'Permissions-Policy': farmos_http_header_permissions_policy} if farmos_http_header_permissions_policy else {})
-    | combine ({'Strict-Transport-Security': farmos_http_header_strict_transport_security} if farmos_http_header_strict_transport_security and farmos_container_labels_traefik_tls else {})
+    | combine ({'X-XSS-Protection': solidinvoice_http_header_xss_protection} if solidinvoice_http_header_xss_protection else {})
+    | combine ({'X-Content-Type-Options': solidinvoice_http_header_content_type_options} if solidinvoice_http_header_content_type_options else {})
+    | combine ({'Content-Security-Policy': solidinvoice_http_header_content_security_policy} if solidinvoice_http_header_content_security_policy else {})
+    | combine ({'Permissions-Policy': solidinvoice_http_header_permissions_policy} if solidinvoice_http_header_permissions_policy else {})
+    | combine ({'Strict-Transport-Security': solidinvoice_http_header_strict_transport_security} if solidinvoice_http_header_strict_transport_security and solidinvoice_container_labels_traefik_tls else {})
   }}
-farmos_container_labels_traefik_additional_response_headers_custom: {}
+solidinvoice_container_labels_traefik_additional_response_headers_custom: {}
 
-# farmos_container_labels_additional_labels contains a multiline string with additional labels to add to the container label file.
+# solidinvoice_container_labels_additional_labels contains a multiline string with additional labels to add to the container label file.
 # See `../templates/labels.j2` for details.
 #
 # Example:
-# farmos_container_labels_additional_labels: |
+# solidinvoice_container_labels_additional_labels: |
 #   my.label=1
 #   another.label="here"
-farmos_container_labels_additional_labels: ""
+solidinvoice_container_labels_additional_labels: ""
 
 # A list of extra arguments to pass to the container (`docker run` command)
-farmos_container_extra_arguments: []
+solidinvoice_container_extra_arguments: []
 
 # Specifies the value of the `X-XSS-Protection` header
 # Stops pages from loading when they detect reflected cross-site scripting (XSS) attacks.
@@ -131,23 +131,23 @@ farmos_container_extra_arguments: []
 # Learn more about it is here:
 # - https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection
 # - https://portswigger.net/web-security/cross-site-scripting/reflected
-farmos_http_header_xss_protection: "1; mode=block"
+solidinvoice_http_header_xss_protection: "1; mode=block"
 
 # Specifies the value of the `X-Content-Type-Options` header.
 # See: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options
-farmos_http_header_content_type_options: nosniff
+solidinvoice_http_header_content_type_options: nosniff
 
 # Specifies the value of the `Content-Security-Policy` header.
 # See: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
-farmos_http_header_content_security_policy: frame-ancestors 'self'
+solidinvoice_http_header_content_security_policy: frame-ancestors 'self'
 
 # Specifies the value of the `Permissions-Policy` header.
 # See: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy
-farmos_http_header_permissions_policy: "{{ 'interest-cohort=()' if farmos_floc_optout_enabled else '' }}"
+solidinvoice_http_header_permissions_policy: "{{ 'interest-cohort=()' if solidinvoice_floc_optout_enabled else '' }}"
 
 # Specifies the value of the `Strict-Transport-Security` header.
 # See: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security
-farmos_http_header_strict_transport_security: "max-age=31536000; includeSubDomains{{ '; preload' if farmos_hsts_preload_enabled else '' }}"
+solidinvoice_http_header_strict_transport_security: "max-age=31536000; includeSubDomains{{ '; preload' if solidinvoice_hsts_preload_enabled else '' }}"
 
 # Controls whether to send a "Permissions-Policy interest-cohort=();" header along with all responses
 #
@@ -157,8 +157,8 @@ farmos_http_header_strict_transport_security: "max-age=31536000; includeSubDomai
 # - https://amifloced.org/
 #
 # Of course, a better solution is to just stop using browsers (like Chrome), which participate in such tracking practices.
-# See: `farmos_http_header_permissions_policy`
-farmos_floc_optout_enabled: true
+# See: `solidinvoice_http_header_permissions_policy`
+solidinvoice_floc_optout_enabled: true
 
 # Controls if HSTS preloading is enabled
 #
@@ -169,37 +169,37 @@ farmos_floc_optout_enabled: true
 # - https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security
 # - https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security
 # - https://hstspreload.org/#opt-in
-# See: `farmos_http_header_strict_transport_security`
-farmos_hsts_preload_enabled: false
+# See: `solidinvoice_http_header_strict_transport_security`
+solidinvoice_hsts_preload_enabled: false
 
-# List of systemd services that the farmOS systemd service depends on
-farmos_systemd_required_services_list: "{{ farmos_systemd_required_services_list_default + farmos_systemd_required_services_list_auto + farmos_systemd_required_services_list_custom }}"
-farmos_systemd_required_services_list_default: "{{ [devture_systemd_docker_base_docker_service_name] if devture_systemd_docker_base_docker_service_name else [] }}"
-farmos_systemd_required_services_list_auto: []
-farmos_systemd_required_services_list_custom: []
+# List of systemd services that the SolidInvoice systemd service depends on
+solidinvoice_systemd_required_services_list: "{{ solidinvoice_systemd_required_services_list_default + solidinvoice_systemd_required_services_list_auto + solidinvoice_systemd_required_services_list_custom }}"
+solidinvoice_systemd_required_services_list_default: "{{ [devture_systemd_docker_base_docker_service_name] if devture_systemd_docker_base_docker_service_name else [] }}"
+solidinvoice_systemd_required_services_list_auto: []
+solidinvoice_systemd_required_services_list_custom: []
 
-# List of systemd services that the farmOS systemd service wants
-farmos_systemd_wanted_services_list: "{{ farmos_systemd_wanted_services_list_default + farmos_systemd_wanted_services_list_auto + farmos_systemd_wanted_services_list_custom }}"
-farmos_systemd_wanted_services_list_default: []
-farmos_systemd_wanted_services_list_auto: []
-farmos_systemd_wanted_services_list_custom: []
+# List of systemd services that the SolidInvoice systemd service wants
+solidinvoice_systemd_wanted_services_list: "{{ solidinvoice_systemd_wanted_services_list_default + solidinvoice_systemd_wanted_services_list_auto + solidinvoice_systemd_wanted_services_list_custom }}"
+solidinvoice_systemd_wanted_services_list_default: []
+solidinvoice_systemd_wanted_services_list_auto: []
+solidinvoice_systemd_wanted_services_list_custom: []
 
 # Specify a database driver to use
 # Valid values: mysql, postgres, sqlite
-farmos_database_type: ""
+solidinvoice_database_type: ""
 
 # Specify database configuration
-farmos_database_mysql_hostname: ""
-farmos_database_mysql_port: 3306
-farmos_database_mysql_username: farmos
-farmos_database_mysql_password: ""
-farmos_database_postgres_hostname: ""
-farmos_database_postgres_port: 5432
-farmos_database_postgres_username: farmos
-farmos_database_postgres_password: ""
-farmos_database_name: farmos
+solidinvoice_database_mysql_hostname: ""
+solidinvoice_database_mysql_port: 3306
+solidinvoice_database_mysql_username: solidinvoice
+solidinvoice_database_mysql_password: ""
+solidinvoice_database_postgres_hostname: ""
+solidinvoice_database_postgres_port: 5432
+solidinvoice_database_postgres_username: solidinvoice
+solidinvoice_database_postgres_password: ""
+solidinvoice_database_name: solidinvoice
 
-farmos_environment_variables_tz: UTC
+solidinvoice_environment_variables_tz: UTC
 
 # Additional environment variables.
-farmos_environment_variables_additional_variables: ""
+solidinvoice_environment_variables_additional_variables: ""

@@ -2,9 +2,9 @@
 galaxy_info:
   author: Suguru Hirahara
   company: progressiv
-  role_name: farmos
+  role_name: solidinvoice
   namespace: progressiv
-  description: farmOS
+  description: SolidInvoice
   platforms:
     - name: Debian
       versions:

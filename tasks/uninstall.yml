@@ -4,82 +4,82 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 ---
-- name: Check existence of farmOS systemd service
+- name: Check existence of SolidInvoice systemd service
   ansible.builtin.stat:
-    path: "{{ devture_systemd_docker_base_systemd_path }}/{{ farmos_identifier }}.service"
-  register: farmos_service_stat
+    path: "{{ devture_systemd_docker_base_systemd_path }}/{{ solidinvoice_identifier }}.service"
+  register: solidinvoice_service_stat
 
-- name: Uninstall farmOS systemd services and files
-  when: farmos_service_stat.stat.exists | bool
+- name: Uninstall SolidInvoice systemd services and files
+  when: solidinvoice_service_stat.stat.exists | bool
   block:
-    - name: Ensure farmOS systemd service is stopped
+    - name: Ensure SolidInvoice systemd service is stopped
       ansible.builtin.service:
-        name: "{{ farmos_identifier }}"
+        name: "{{ solidinvoice_identifier }}"
         state: stopped
         enabled: false
         daemon_reload: true
 
-    - name: Ensure farmOS systemd service does not exist
+    - name: Ensure SolidInvoice systemd service does not exist
       ansible.builtin.file:
-        path: "{{ devture_systemd_docker_base_systemd_path }}/{{ farmos_identifier }}.service"
+        path: "{{ devture_systemd_docker_base_systemd_path }}/{{ solidinvoice_identifier }}.service"
         state: absent
 
-    - name: Ensure farmOS support files do not exist
+    - name: Ensure SolidInvoice support files do not exist
       ansible.builtin.file:
-        path: "{{ farmos_base_path }}/{{ item }}"
+        path: "{{ solidinvoice_base_path }}/{{ item }}"
         state: absent
       with_items:
         - env
         - labels
 
-    - name: Ensure farmOS image source files path does not exist
+    - name: Ensure SolidInvoice image source files path does not exist
       ansible.builtin.file:
-        path: "{{ farmos_container_image_self_build_src_files_path }}"
+        path: "{{ solidinvoice_container_image_self_build_src_files_path }}"
         state: absent
 
-    - name: Ensure farmOS local data path does not exist if empty
+    - name: Ensure SolidInvoice local data path does not exist if empty
       ansible.builtin.command:
-        cmd: "rmdir {{ farmos_data_path }}"
-      register: farmos_data_path_deletion_result
-      changed_when: farmos_data_path_deletion_result.rc == 0
+        cmd: "rmdir {{ solidinvoice_data_path }}"
+      register: solidinvoice_data_path_deletion_result
+      changed_when: solidinvoice_data_path_deletion_result.rc == 0
       failed_when: false
 
-    - name: Ensure farmOS base path does not exist if empty
+    - name: Ensure SolidInvoice base path does not exist if empty
       ansible.builtin.command:
-        cmd: "rmdir {{ farmos_base_path }}"
-      register: farmos_base_path_deletion_result
-      changed_when: farmos_base_path_deletion_result.rc == 0
+        cmd: "rmdir {{ solidinvoice_base_path }}"
+      register: solidinvoice_base_path_deletion_result
+      changed_when: solidinvoice_base_path_deletion_result.rc == 0
       failed_when: false
 
-    - name: Ensure farmOS container network does not exist via community.docker.docker_network
+    - name: Ensure SolidInvoice container network does not exist via community.docker.docker_network
       when: devture_systemd_docker_base_container_network_creation_method == 'ansible-module'
       community.docker.docker_network:
-        name: "{{ farmos_container_network }}"
+        name: "{{ solidinvoice_container_network }}"
         state: absent
 
-    - name: Ensure farmOS container network does not exist via ansible.builtin.command
+    - name: Ensure SolidInvoice container network does not exist via ansible.builtin.command
       when: devture_systemd_docker_base_container_network_creation_method == 'command'
       ansible.builtin.command:
         cmd: >-
           {{ devture_systemd_docker_base_host_command_docker }} network rm
-          {{ farmos_container_network }}
+          {{ solidinvoice_container_network }}
       register: network_deletion_result
-      changed_when: farmos_container_network in network_deletion_result.stdout
+      changed_when: solidinvoice_container_network in network_deletion_result.stdout
 
-- name: Check existence of farmOS local data path
+- name: Check existence of SolidInvoice local data path
   ansible.builtin.stat:
-    path: "{{ farmos_data_path }}"
-  register: farmos_data_path_stat
+    path: "{{ solidinvoice_data_path }}"
+  register: solidinvoice_data_path_stat
 
 # We just want to notify the user. Deleting data is too destructive.
-- name: Notify if farmOS local data remains
-  when: farmos_data_path_stat.stat.exists | bool
+- name: Notify if SolidInvoice local data remains
+  when: solidinvoice_data_path_stat.stat.exists | bool
   ansible.builtin.set_fact:
     devture_playbook_runtime_messages_list: |
       {{
         devture_playbook_runtime_messages_list | default([])
         +
         [
-          "Note: As the local farmOS instance has been removed, some old data remains in `" + farmos_data_path + "`. Feel free to delete it."
+          "Note: As the local SolidInvoice instance has been removed, some old data remains in `" + solidinvoice_data_path + "`. Feel free to delete it."
         ]
       }}
