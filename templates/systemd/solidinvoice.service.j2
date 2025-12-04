@@ -35,8 +35,7 @@ ExecStartPre={{ devture_systemd_docker_base_host_command_docker }} create \
       {% endif %}
       --env-file={{ solidinvoice_base_path }}/env \
       --label-file={{ solidinvoice_base_path }}/labels \
-      --mount type=bind,src={{ solidinvoice_keys_path }},dst=/opt/drupal/keys \
-      --mount type=bind,src={{ solidinvoice_sites_path }},dst=/opt/drupal/web/sites \
+      --mount type=bind,src={{ solidinvoice_data_path }},dst=/etc/solidinvoice \
       {% for volume in solidinvoice_container_additional_volumes %}
       --mount type={{ volume.type | default('bind' if '/' in volume.src else 'volume') }},src={{ volume.src }},dst={{ volume.dst }}{{ (',' + volume.options) if volume.options else '' }} \
       {% endfor %}

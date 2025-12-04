@@ -14,8 +14,6 @@
   with_items:
     - "{{ solidinvoice_base_path }}"
     - "{{ solidinvoice_data_path }}"
-    - "{{ solidinvoice_keys_path }}"
-    - "{{ solidinvoice_sites_path }}"
 
 - name: Ensure SolidInvoice support files installed
   ansible.builtin.template:
