@@ -32,10 +32,6 @@
         - env
         - labels
 
-    - name: Ensure SolidInvoice image source files path does not exist
-      ansible.builtin.file:
-        path: "{{ solidinvoice_container_image_self_build_src_files_path }}"
-
     - name: Ensure SolidInvoice config path for Caddy inside the container does not exist
       ansible.builtin.file:
         path: "{{ solidinvoice_config_path }}"

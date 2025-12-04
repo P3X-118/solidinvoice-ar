@@ -47,7 +47,7 @@ ExecStartPre={{ devture_systemd_docker_base_host_command_docker }} create \
       {% for arg in solidinvoice_container_extra_arguments %}
       {{ arg }} \
       {% endfor %}
-      {{ solidinvoice_container_image_self_build_name if solidinvoice_container_image_self_build else solidinvoice_container_image }}
+      {{ solidinvoice_container_image }}
 
 {% for network in solidinvoice_container_additional_networks %}
 ExecStartPre={{ devture_systemd_docker_base_host_command_docker }} network connect {{ network }} {{ solidinvoice_identifier }}

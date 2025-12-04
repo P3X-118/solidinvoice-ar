@@ -45,12 +45,7 @@ solidinvoice_container_image_registry_prefix: "{{ solidinvoice_container_image_r
 solidinvoice_container_image_registry_prefix_upstream: "{{ solidinvoice_container_image_registry_prefix_upstream_default }}"
 solidinvoice_container_image_registry_prefix_upstream_default: docker.io/
 solidinvoice_container_image_force_pull: "{{ solidinvoice_container_image.endswith(':latest') }}"
-
-solidinvoice_container_image_self_build: false
-solidinvoice_container_image_self_build_name: "solidinvoice/solidinvoice:{{ solidinvoice_container_image_self_build_repo_version }}"
-solidinvoice_container_image_self_build_repo: "https://github.com/SolidInvoice/SolidInvoice.git"
-solidinvoice_container_image_self_build_repo_version: "{{ solidinvoice_version if solidinvoice_version != 'latest' else 'main' }}"
-solidinvoice_container_image_self_build_src_files_path: "{{ solidinvoice_base_path }}/docker-src"
+# TODO: add tasks to self-build the image
 
 # Controls whether the container exposes its HTTP port (tcp/80 in the container).
 #
