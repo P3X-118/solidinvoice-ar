@@ -60,7 +60,7 @@ solidinvoice_container_http_host_bind_port: ""
 solidinvoice_container_network: "{{ solidinvoice_identifier }}"
 
 # The port number in the container
-solidinvoice_container_http_port: 80
+solidinvoice_container_http_port: 8765
 
 # A list of additional container networks that the container would be connected to.
 # The role does not create these networks, so make sure they already exist.
