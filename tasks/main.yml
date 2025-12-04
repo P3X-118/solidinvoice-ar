@@ -1,0 +1,43 @@
+# SPDX-FileCopyrightText: 2023 Slavi Pantaleev
+# SPDX-FileCopyrightText: 2025 Suguru Hirahara
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+---
+- name: Perform farmOS installation tasks
+  when: farmos_enabled | bool
+  tags:
+    - setup-all
+    - setup-farmos
+    - install-all
+    - install-farmos
+  block:
+    - name: Validate farmOS configuration
+      ansible.builtin.include_tasks: "{{ role_path }}/tasks/validate_config.yml"
+    - name: Install farmOS
+      ansible.builtin.include_tasks: "{{ role_path }}/tasks/install.yml"
+
+- name: Perform tasks to print database credentials for farmOS
+  when: farmos_enabled | bool
+  tags:
+    - print-db-credentials-farmos
+  block:
+    - name: Print database credentials for farmOS
+      ansible.builtin.include_tasks: "{{ role_path }}/tasks/print_db_credentials.yml"
+
+- name: Perform tasks to add `trusted_host_patterns`
+  when: farmos_enabled | bool
+  tags:
+    - trusted-host-farmos
+  block:
+    - name: Run a command for adding farmOS hostname to `trusted_host_patterns` on settings.php
+      ansible.builtin.include_tasks: "{{ role_path }}/tasks/trusted_host_patterns.yml"
+
+- name: Perform farmOS uninstallation tasks
+  when: not farmos_enabled | bool
+  tags:
+    - setup-all
+    - setup-farmos
+  block:
+    - name: Uninstall farmOS
+      ansible.builtin.include_tasks: "{{ role_path }}/tasks/uninstall.yml"
