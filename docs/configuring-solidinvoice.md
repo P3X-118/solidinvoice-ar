@@ -115,16 +115,6 @@ On the set up wizard, it is required to input database credentials to use a MySQ
 ansible-playbook -i inventory/hosts setup.yml --tags=print-db-credentials-solidinvoice
 ```
 
-### Configuring `trusted_host_patterns` setting (recommended)
-
-After installation, you will find the error reported on the dashboard at `https://example.com/admin/reports/status` that the `trusted_host_patterns` setting is not configured in settings.php. You can fix the error by adding the configuration to the file at `/mash/solidinvoice/data/sites/default/settings.php` manually.
-
-Alternatively, you can automatically add the configuration to the file by running the command below:
-
-```sh
-ansible-playbook -i inventory/hosts setup.yml --tags=trusted-host-solidinvoice
-```
-
 ## Troubleshooting
 
 ### Check the service's logs

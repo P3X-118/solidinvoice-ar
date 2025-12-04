@@ -25,14 +25,6 @@
     - name: Print database credentials for SolidInvoice
       ansible.builtin.include_tasks: "{{ role_path }}/tasks/print_db_credentials.yml"
 
-- name: Perform tasks to add `trusted_host_patterns`
-  when: solidinvoice_enabled | bool
-  tags:
-    - trusted-host-solidinvoice
-  block:
-    - name: Run a command for adding SolidInvoice hostname to `trusted_host_patterns` on settings.php
-      ansible.builtin.include_tasks: "{{ role_path }}/tasks/trusted_host_patterns.yml"
-
 - name: Perform SolidInvoice uninstallation tasks
   when: not solidinvoice_enabled | bool
   tags:
