@@ -29,16 +29,21 @@ ExecStartPre={{ devture_systemd_docker_base_host_command_docker }} create \
       --log-driver=none \
       --user={{ solidinvoice_uid }}:{{ solidinvoice_gid }} \
       --cap-drop=ALL \
+      --read-only \
       --network={{ solidinvoice_container_network }} \
       {% if solidinvoice_container_http_host_bind_port %}
       -p {{ solidinvoice_container_http_host_bind_port }}:{{ solidinvoice_container_http_port }} \
       {% endif %}
       --env-file={{ solidinvoice_base_path }}/env \
       --label-file={{ solidinvoice_base_path }}/labels \
+      --mount type=bind,src={{ solidinvoice_config_path }},dst=/.config \
       --mount type=bind,src={{ solidinvoice_data_path }},dst=/etc/solidinvoice \
+      --mount type=bind,src={{ solidinvoice_local_path }},dst=/.local \
+      --mount type=bind,src={{ solidinvoice_home_path }},dst=/.SolidInvoice \
       {% for volume in solidinvoice_container_additional_volumes %}
       --mount type={{ volume.type | default('bind' if '/' in volume.src else 'volume') }},src={{ volume.src }},dst={{ volume.dst }}{{ (',' + volume.options) if volume.options else '' }} \
       {% endfor %}
+      --tmpfs=/tmp:rw,noexec,nosuid,size=128m \
       {% for arg in solidinvoice_container_extra_arguments %}
       {{ arg }} \
       {% endfor %}

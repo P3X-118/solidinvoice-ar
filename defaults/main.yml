@@ -14,7 +14,12 @@ solidinvoice_enabled: true
 
 solidinvoice_identifier: solidinvoice
 solidinvoice_base_path: "/{{ solidinvoice_identifier }}"
+
+# `solidinvoice_data_path` is used for storing data in mounted directories as well
 solidinvoice_data_path: "{{ solidinvoice_base_path }}/data"
+solidinvoice_config_path: "{{ solidinvoice_data_path }}/config"
+solidinvoice_local_path: "{{ solidinvoice_data_path }}/local"
+solidinvoice_home_path: "{{ solidinvoice_data_path }}/home"
 
 # renovate: datasource=docker depName=solidinvoice/solidinvoice
 solidinvoice_version: 2.3.10

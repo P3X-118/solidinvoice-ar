@@ -35,6 +35,15 @@
     - name: Ensure SolidInvoice image source files path does not exist
       ansible.builtin.file:
         path: "{{ solidinvoice_container_image_self_build_src_files_path }}"
+
+    - name: Ensure SolidInvoice config path for Caddy inside the container does not exist
+      ansible.builtin.file:
+        path: "{{ solidinvoice_config_path }}"
+        state: absent
+
+    - name: Ensure SolidInvoice local path for Caddy inside the container does not exist
+      ansible.builtin.file:
+        path: "{{ solidinvoice_local_path }}"
         state: absent
 
     - name: Ensure SolidInvoice local data path does not exist if empty
