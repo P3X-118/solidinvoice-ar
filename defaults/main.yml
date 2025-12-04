@@ -8,7 +8,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 ---
-# Project source code URL: https://github.com/SolidInvoice/SolidInvoice
+# Project source code URL: https://github.com/solidinvoice/solidinvoice
 
 solidinvoice_enabled: true
 
@@ -20,8 +20,8 @@ solidinvoice_data_path: "{{ solidinvoice_base_path }}/data"
 solidinvoice_keys_path: "{{ solidinvoice_data_path }}/keys"
 solidinvoice_sites_path: "{{ solidinvoice_data_path }}/sites"
 
-# renovate: datasource=docker depName=solidinvoice/solidinvoice versioning=semver
-solidinvoice_version: 3.4.5
+# renovate: datasource=docker depName=solidinvoice/solidinvoice
+solidinvoice_version: 2.3.10
 
 solidinvoice_uid: ""
 solidinvoice_gid: ""
