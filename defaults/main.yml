@@ -195,6 +195,7 @@ solidinvoice_database_postgres_username: solidinvoice
 solidinvoice_database_postgres_password: ""
 solidinvoice_database_name: solidinvoice
 
+# Specify the timezone
 solidinvoice_environment_variables_tz: UTC
 
 # Additional environment variables.
