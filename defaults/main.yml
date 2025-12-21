@@ -121,7 +121,7 @@ solidinvoice_container_labels_additional_labels: "{{ solidinvoice_container_labe
 solidinvoice_container_labels_additional_labels_auto: {}
 solidinvoice_container_labels_additional_labels_custom: {}
 
-# A list of extra arguments to pass to the container (`docker run` command)
+# A list of extra arguments to pass to the container (`docker create` command)
 solidinvoice_container_extra_arguments: "{{ solidinvoice_container_extra_arguments_auto + solidinvoice_container_extra_arguments_custom }}"
 solidinvoice_container_extra_arguments_auto: []
 solidinvoice_container_extra_arguments_custom: []
