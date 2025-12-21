@@ -32,7 +32,7 @@ solidinvoice_scheme: https
 # The hostname at which SolidInvoice is served.
 solidinvoice_hostname: ""
 
-# The path at which SolidInvoice is exposed.
+# The path at which SolidInvoice is served.
 # This value must either be `/` or not end with a slash (e.g. `/solidinvoice`).
 #
 # Hosting SolidInvoice under a subpath does not seem to be possible due to SolidInvoice's
