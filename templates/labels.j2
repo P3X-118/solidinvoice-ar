@@ -56,4 +56,6 @@ traefik.http.routers.{{ solidinvoice_identifier }}.tls.certResolver={{ solidinvo
 traefik.http.services.{{ solidinvoice_identifier }}.loadbalancer.server.port={{ solidinvoice_container_http_port }}
 {% endif %}
 
-{{ solidinvoice_container_labels_additional_labels }}
+{% for arg in solidinvoice_container_labels_additional_labels %}
+{{ arg }}
+{% endfor %}

@@ -115,11 +115,11 @@ solidinvoice_container_labels_traefik_additional_response_headers_custom: {}
 #
 # Example:
 # solidinvoice_container_labels_additional_labels_custom: |
-#   my.label=1
-#   another.label="here"
-solidinvoice_container_labels_additional_labels: "{{ solidinvoice_container_labels_additional_labels_auto | combine(solidinvoice_container_labels_additional_labels_custom) }}"
-solidinvoice_container_labels_additional_labels_auto: {}
-solidinvoice_container_labels_additional_labels_custom: {}
+#   - my.label=1
+#   - another.label="here"
+solidinvoice_container_labels_additional_labels: "{{ solidinvoice_container_labels_additional_labels_auto + solidinvoice_container_labels_additional_labels_custom }}"
+solidinvoice_container_labels_additional_labels_auto: []
+solidinvoice_container_labels_additional_labels_custom: []
 
 # A list of extra arguments to pass to the container (`docker create` command)
 solidinvoice_container_extra_arguments: "{{ solidinvoice_container_extra_arguments_auto + solidinvoice_container_extra_arguments_custom }}"
