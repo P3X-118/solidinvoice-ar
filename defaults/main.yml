@@ -27,6 +27,7 @@ solidinvoice_version: 2.3.13
 solidinvoice_uid: ""
 solidinvoice_gid: ""
 
+# The scheme used for serving SolidInvoice.
 solidinvoice_scheme: https
 
 # The hostname at which SolidInvoice is served.
