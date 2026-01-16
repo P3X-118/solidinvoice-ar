@@ -22,7 +22,7 @@ solidinvoice_local_path: "{{ solidinvoice_data_path }}/local"
 solidinvoice_home_path: "{{ solidinvoice_data_path }}/home"
 
 # renovate: datasource=docker depName=solidinvoice/solidinvoice
-solidinvoice_version: 2.3.13
+solidinvoice_version: 2.3.14
 
 solidinvoice_uid: ""
 solidinvoice_gid: ""
