@@ -182,7 +182,7 @@ solidinvoice_hsts_preload_enabled: false
 
 # List of systemd services that the SolidInvoice systemd service depends on
 solidinvoice_systemd_required_services_list: "{{ solidinvoice_systemd_required_services_list_default + solidinvoice_systemd_required_services_list_auto + solidinvoice_systemd_required_services_list_custom }}"
-solidinvoice_systemd_required_services_list_default: "{{ [devture_systemd_docker_base_docker_service_name] if devture_systemd_docker_base_docker_service_name else [] }}"
+solidinvoice_systemd_required_services_list_default: "{{ [sysd_docker_service] if sysd_docker_service else [] }}"
 solidinvoice_systemd_required_services_list_auto: []
 solidinvoice_systemd_required_services_list_custom: []
 
